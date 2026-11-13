@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- Bright HelloFresh-inspired lime/fresh green gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9be12c" />
+      <stop offset="55%" stop-color="#76c015" />
+      <stop offset="100%" stop-color="#459300" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2.5" flood-color="#1a4000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Full-bleed 128x128 rounded squircle background -->
+  <rect x="0" y="0" width="128" height="128" rx="26" ry="26" fill="url(#bgGrad)" />
+
+  <!-- Fresh lime/leaf sprout motif at top -->
+  <g filter="url(#shadow)">
+    <!-- Left smaller leaf -->
+    <path d="M 62 29 C 50 14, 31 16, 31 16 C 31 16, 34 32, 52 35 C 57 35.5, 61 32, 62 29 Z" fill="#e6f9c2" />
+    <!-- Right main fresh leaf -->
+    <path d="M 65 31 C 68 10, 98 8, 103 8 C 103 8, 103 34, 77 37.5 C 70 38.5, 65 35, 65 31 Z" fill="#ffffff" />
+    <!-- Leaf vein -->
+    <path d="M 68 31 Q 82 21 96 13" fill="none" stroke="#6bb610" stroke-width="2.8" stroke-linecap="round" />
+  </g>
+
+  <!-- Large, Bold "HF" Letters in White filling the icon -->
+  <g filter="url(#shadow)" fill="#ffffff">
+    <!-- Letter H -->
+    <rect x="14" y="38" width="16" height="76" rx="5" />
+    <rect x="50" y="38" width="16" height="76" rx="5" />
+    <rect x="24" y="68" width="32" height="15" rx="4" />
+
+    <!-- Letter F -->
+    <rect x="76" y="38" width="16" height="76" rx="5" />
+    <rect x="76" y="38" width="40" height="15" rx="5" />
+    <rect x="76" y="68" width="32" height="15" rx="5" />
+  </g>
+</svg>

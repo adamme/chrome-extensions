@@ -1,0 +1,279 @@
+/* Discrete 10-color gradient scale (1 = Red -> 10 = Green)
+   Rounds down to nearest whole number (Math.floor(score), clamped 1..10) */
+
+:root {
+  --hf-rate-1: #b71c1c;  /* 1: Deep Crimson Red */
+  --hf-rate-2: #d32f2f;  /* 2: Strong Red */
+  --hf-rate-3: #e64a19;  /* 3: Red-Orange */
+  --hf-rate-4: #f4511e;  /* 4: Dark Orange */
+  --hf-rate-5: #ff8f00;  /* 5: Vivid Orange */
+  --hf-rate-6: #ffb300;  /* 6: Amber / Caution Gold */
+  --hf-rate-7: #fdd835;  /* 7: Yellow (Okay / Borderline) */
+  --hf-rate-8: #7cb342;  /* 8: Fresh Lime Green (Pretty Good) */
+  --hf-rate-9: #2e9e44;  /* 9: Vibrant Green (Great) */
+  --hf-rate-10: #087f23; /* 10: Deep Rich Emerald Green (Top Tier) */
+}
+
+/* Ensure card image wrapper or card container can anchor the badge */
+.hf-rating-anchor-relative {
+  position: relative !important;
+}
+
+/* Main badge container in upper-right corner of the meal card */
+.hf-meal-rating-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 35;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 38px;
+  height: 30px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(0, 0, 0, 0.18);
+  cursor: help;
+  user-select: none;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.15s ease;
+  pointer-events: auto;
+}
+
+.hf-meal-rating-badge:hover {
+  transform: scale(1.08);
+  z-index: 100;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.45),
+    0 0 0 1.5px rgba(0, 0, 0, 0.25);
+}
+
+.hf-meal-rating-badge__star {
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.92;
+}
+
+.hf-meal-rating-badge__score {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Color classes 1 to 10 (rounded down from rating) */
+.hf-meal-rating-badge--bucket-1 {
+  background-color: var(--hf-rate-1);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.hf-meal-rating-badge--bucket-2 {
+  background-color: var(--hf-rate-2);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.hf-meal-rating-badge--bucket-3 {
+  background-color: var(--hf-rate-3);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.hf-meal-rating-badge--bucket-4 {
+  background-color: var(--hf-rate-4);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.hf-meal-rating-badge--bucket-5 {
+  background-color: var(--hf-rate-5);
+  color: #111827;
+}
+
+.hf-meal-rating-badge--bucket-6 {
+  background-color: var(--hf-rate-6);
+  color: #111827;
+}
+
+.hf-meal-rating-badge--bucket-7 {
+  background-color: var(--hf-rate-7);
+  color: #111827;
+}
+
+.hf-meal-rating-badge--bucket-8 {
+  background-color: var(--hf-rate-8);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hf-meal-rating-badge--bucket-9 {
+  background-color: var(--hf-rate-9);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hf-meal-rating-badge--bucket-10 {
+  background-color: var(--hf-rate-10);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+/* Hover details popover */
+.hf-meal-rating-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 240px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(17, 24, 39, 0.96);
+  color: #f9fafb;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  text-shadow: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 200;
+}
+
+.hf-meal-rating-badge:hover .hf-meal-rating-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.hf-meal-rating-tooltip__title {
+  font-weight: 700;
+  font-size: 12px;
+  color: #ffffff;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.hf-meal-rating-tooltip__meta {
+  color: #d1d5db;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.hf-meal-rating-tooltip__notes {
+  color: #fde68a;
+  font-size: 11px;
+  font-style: italic;
+  margin-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 4px;
+}
+
+.hf-meal-rating-tooltip__history {
+  color: #9ca3af;
+  font-size: 10.5px;
+  margin-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 4px;
+}
+
+/* Filtered card state:
+   Wait! Do NOT use `display: none` on HelloFresh's `<li data-test-id="item-...">`!
+   HelloFresh uses an IntersectionObserver on every card in a multi-grid layout.
+   If a card is `display: none`, all cards below it shift up into the viewport,
+   triggering IntersectionObserver to mount them, which then hides more premium cards,
+   causing the page height to collapse and expand in a violent React re-render loop!
+   Instead, we dim/mute filtered cards in-place so grid geometry stays 100% stable. */
+.hf-card-filtered-out,
+body.hf-filter-hide-premium li[data-test-id^="item-"][data-hf-preload-premium="true"],
+body.hf-filter-hide-below7 li[data-test-id^="item-"][data-hf-below7="true"] {
+  opacity: 0.14 !important;
+  filter: grayscale(100%) !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+.hf-card-filtered-out:hover,
+body.hf-filter-hide-premium li[data-test-id^="item-"][data-hf-preload-premium="true"]:hover,
+body.hf-filter-hide-below7 li[data-test-id^="item-"][data-hf-below7="true"]:hover {
+  opacity: 0.45 !important;
+  pointer-events: auto !important;
+}
+
+/* Inline quick-filter bar injected into HelloFresh store header */
+.hf-ext-filter-bar {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 4px 0;
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1.5px solid #d1d5db;
+  border-radius: 999px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 12.5px;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.hf-ext-filter-bar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  color: #067a46;
+  padding-right: 6px;
+  border-right: 1px solid #e5e7eb;
+  user-select: none;
+}
+
+.hf-ext-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.hf-ext-filter-pill:hover {
+  border-color: #067a46;
+  background: #f0fdf4;
+}
+
+.hf-ext-filter-pill input[type="checkbox"] {
+  accent-color: #067a46;
+  width: 13.5px;
+  height: 13.5px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.hf-ext-filter-pill--active {
+  background: #ecfdf5;
+  border-color: #067a46;
+  color: #065f46;
+}
+
+.hf-ext-filter-bar__count {
+  font-size: 11.5px;
+  color: #6b7280;
+  font-weight: 500;
+  padding-left: 4px;
+}
+
